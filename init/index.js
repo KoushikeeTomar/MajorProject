@@ -4,7 +4,12 @@ const Listing=require("../Models/listing.js");
 const User = require("../Models/user.js"); 
 
 
-const MONGO_URL='mongodb://127.0.0.1:27017/WanderLust';
+// const MONGO_URL='mongodb://127.0.0.1:27017/WanderLust';
+if(process.env.NODE_ENV != "production"){
+    require("dotenv").config();
+}
+
+const MONGO_URL = process.env.ATLAS_DB_URL;
 
 async function main() {
     await mongoose.connect(MONGO_URL);
@@ -21,7 +26,7 @@ main()
 const initDB=async()=>{
     await Listing.deleteMany({});
     const ownerId = new mongoose.Types.ObjectId('6880ca94d5a11b7da3d4138d');
-    const existingUser = await User.findOne({ username: "testuser" });
+    const existingUser = await User.findOne({ username: "delta-student" });
 
 if (!existingUser) {
     console.error("❌ testuser not found in DB. Create it first.");

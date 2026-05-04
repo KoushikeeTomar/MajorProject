@@ -37,7 +37,7 @@ const store = MongoStore.create({
     touchAfter: 24*3600,
 });
 
-store.on("error", () => {
+store.on("error", (err) => {
     console.log("error on mongo store", err);
 });
 
@@ -111,6 +111,7 @@ app.use((req,res,next) => {
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
+console.log(process.env.ATLAS_DB_URL);
 
 
 

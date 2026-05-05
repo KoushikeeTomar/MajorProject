@@ -29,7 +29,7 @@ const userRouter=require("./routes/user.js");
 
 const dbUrl = process.env.ATLAS_DB_URL;
 
-
+console.log("ENV CHECK:", process.env.ATLAS_DB_URL);
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto:{

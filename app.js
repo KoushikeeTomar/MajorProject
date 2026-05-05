@@ -7,8 +7,9 @@ const mongoose=require("mongoose");
 const Listing=require("./Models/listing.js");
 const ejsMate=require("ejs-mate");
 const path=require("path");
-const { constants } = require("buffer");
+// const { constants } = require("buffer");
 const app=express();
+app.set("trust proxy", 1);
 const methodOverride=require("method-override");
 const wrapAsync=require("./utils/wrapAsync.js");
 const expressError=require("./utils/expressError.js");
@@ -41,7 +42,7 @@ store.on("error", (err) => {
     console.log("error on mongo store", err);
 });
 
-sessionOptions={
+const sessionOptions={
     store:store,
     secret:process.env.SECRET,
     resave:false,
@@ -50,6 +51,7 @@ sessionOptions={
         expires:Date.now()+7*24*60*60*1000,
         maxAge:7*24*60*60*1000,
         httpOnly:true,
+        secure: process.env.NODE_ENV === "production",
     },
 };
 
@@ -89,7 +91,7 @@ main()
     console.log(err);
 });
 
-app.use(flash());
+// app.use(flash());
 
 app.use((req,res,next) => {
     res.locals.success=req.flash("success");
@@ -111,7 +113,7 @@ app.use((req,res,next) => {
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
-console.log(process.env.ATLAS_DB_URL);
+// console.log(process.env.ATLAS_DB_URL);
 
 
 

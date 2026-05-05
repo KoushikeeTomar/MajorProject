@@ -1,7 +1,13 @@
 {
+  "name": "wanderlust",
+  "version": "1.0.0",
+  "main": "app.js",
   "engines": {
     "node": "22.16.0"
   },
+  "scripts": {
+  "start": "node app.js"
+},
   "dependencies": {
     "cloudinary": "^2.7.0",
     "connect-flash": "^0.1.1",

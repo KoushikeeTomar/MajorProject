@@ -28,6 +28,10 @@ module.exports.showListing = async(req,res)=>{
         res.redirect("/listings");
     }
      console.log("💡 Owner populated:", listing.owner);
+     listing.geometry = {
+        type: "Point",
+        coordinates: [77.1025, 28.7041] // Delhi
+    };
     res.render("listings/show.ejs",{listing});
 };
 

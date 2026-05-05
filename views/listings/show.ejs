@@ -88,5 +88,16 @@
       
           </div>
 </div>
+<% if(listing.geometry && listing.geometry.coordinates) { %>
 
-        
+<script>
+  const listingData = {
+    coordinates: <%- JSON.stringify(listing.geometry.coordinates) %>,
+    title: "<%= listing.title %>"
+  };
+</script>
+
+<script src="/js/map.js"></script>
+
+<% } %>
+<script src="/js/map.js"></script>
